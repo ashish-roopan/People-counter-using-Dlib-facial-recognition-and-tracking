@@ -63,13 +63,13 @@ class FaceRecognizer:
 		# load the face detector
 		self.detector = dlib.get_frontal_face_detector()
 
-		# loading database
-		# if(os.path.exists(self.db_path)):
-		# 	self.database = pk.load(open(self.db_path, "rb"))
-		# 	print(self.database)
-		# else:
-		self.database = []
-		self.database.append(('name', np.zeros(128,dtype=np.float64)))
+		loading database
+		if(os.path.exists(self.db_path)):
+			self.database = pk.load(open(self.db_path, "rb"))
+			print(self.database)
+		else:
+			self.database = []
+			self.database.append(('name', np.zeros(128,dtype=np.float64)))
 
 	def add_new_face(self, img, name):
 		""" Adds a new face to the database.
@@ -87,7 +87,7 @@ class FaceRecognizer:
 			print("Added {} to the database".format(name))
 
 		# Saving database
-		#dump(self.database, open(self.db_path, "wb"))
+		dump(self.database, open(self.db_path, "wb"))
 
 	def delete_a_face(self, name):
 		""" Deletes an entry from the database.
@@ -130,8 +130,8 @@ class FaceRecognizer:
 		return img,box,names
 
 if ( __name__ == "__main__"):
-	images =os.listdir('Webcam')
+	images =os.listdir('img_DIR')
 	for image in images:
 		fce=FaceRecognizer()
 		camera = cv2.imread('Webcam/'+image)
-		fce.add_new_face(camera,'sudhan')
+		fce.add_new_face(camera,'new_name')
